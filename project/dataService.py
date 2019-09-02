@@ -31,7 +31,7 @@ class data_class_mongod(object):
 
 
 
-    def query_bar_from_rq(
+    def query_bar_from_rq_list(
             self, vt_symbol: str, interval: Interval, start: datetime, end: datetime
     ):
         """
@@ -48,7 +48,7 @@ class data_class_mongod(object):
         )
         rqdata_client.symbols.add('CU99')
         data = rqdata_client.query_history(req)
-        print(type(data))
+
         if data:
             database_manager.save_bar_data(data)
 
@@ -67,7 +67,7 @@ class data_class_mongod(object):
         )
         rqdata_client.symbols.add(symbol)
         data = rqdata_client.query_history(req)
-        print(type(data))
+
         if data:
             database_manager.save_bar_data(data)
 
