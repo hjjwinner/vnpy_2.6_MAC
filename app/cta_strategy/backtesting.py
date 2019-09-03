@@ -28,6 +28,8 @@ from .base import (
 )
 from .template import CtaTemplate
 
+from  vnpy.project.data_catch import symbol_data_catch
+
 sns.set_style("whitegrid")
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
@@ -209,6 +211,13 @@ class BacktestingEngine:
 
     def load_data(self):
         """"""
+        # if self.have_catch():
+        #     self.load_data_catch()
+        #     return
+
+        cd = symbol_data_catch
+        dataList = []
+
         self.output("开始加载历史数据")
 
         if not self.end:
@@ -230,7 +239,6 @@ class BacktestingEngine:
 
         while start < self.end:
             end = min(end, self.end)  # Make sure end time stays within set range
-            
             if self.mode == BacktestingMode.BAR:
                 data = load_bar_data(
                     self.symbol,
@@ -246,7 +254,7 @@ class BacktestingEngine:
                     start,
                     end
                 )
-
+            dataList.append(data)
             self.history_data.extend(data)
             
             progress += progress_delta / total_delta
@@ -256,8 +264,60 @@ class BacktestingEngine:
             
             start = end
             end += progress_delta
-        
+
+        cd.save_symbol_data(symbol=self.symbol, start=self.start, end=self.end,data=dataList)
         self.output(f"历史数据加载完成，数据量：{len(self.history_data)}")
+
+    def have_catch(self):
+
+        cd = symbol_data_catch
+
+        if self.symbol not in cd.symbolData:
+            return False
+
+        if not cd.symbolData[self.symbol]['start'] == self.start:
+            return False
+
+        if not cd.symbolData[self.symbol]['end'] == self.end:
+            return False
+
+        return True
+
+    def load_data_catch(self):
+        """"""
+        cd = symbol_data_catch
+        catchData = cd.symbolData[self.symbol]['data']
+
+        if catchData:
+            self.history_data.clear()
+            self.history_data.extend(catchData)
+
+
+        self.output("开始加载历史数据")
+
+
+        # Load 30 days of data each time and allow for progress update
+        progress_delta = timedelta(days=30)
+        total_delta = cd.symbolData[self.symbol]['end'] - cd.symbolData[self.symbol]['start']
+
+        start = 0
+        end = len(catchData)
+        progress = 0
+
+        while start < end:
+            data = catchData[start]
+
+            self.history_data.extend(data)
+
+            progress += progress_delta / total_delta
+            progress = min(progress, 1)
+            progress_bar = "#" * int(progress * 10)
+            self.output(f"加载进度：{progress_bar} [{progress:.0%}]")
+
+            start = start + 1
+
+
+        self.output(f"历史缓存数据加载完成，数据量：{len(self.history_data)}")
 
     def run_backtesting(self):
         """"""

@@ -25,7 +25,7 @@ class back_testing_service():
 
 
 
-    def run_testing(self):
+    def run_testing(self, showData=True):
         engine = BacktestingEngine()
 
         engine.set_parameters(
@@ -43,5 +43,7 @@ class back_testing_service():
         engine.load_data()
         engine.run_backtesting()
         df = engine.calculate_result()
-        engine.calculate_statistics(df)
-        engine.show_chart(df)
+        test_resure =  engine.calculate_statistics(df, output=showData)
+        if showData:
+            engine.show_chart(df)
+        return test_resure

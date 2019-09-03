@@ -26,7 +26,7 @@ class data_class_mongod(object):
         if not username or not password:
             return
         rq.init(username, password,
-                            ('rqdatad-pro.ricequant.com', 16011))
+                ('rqdatad-pro.ricequant.com', 16011))
         return rq
 
 
@@ -69,6 +69,7 @@ class data_class_mongod(object):
         data = rqdata_client.query_history(req)
 
         if data:
+
             database_manager.save_bar_data(data)
 
 
