@@ -25,7 +25,7 @@ class back_testing_service():
 
 
 
-    def run_testing(self, showData=True):
+    def run_testing(self, showData=True,Template=AtrRsiStrategy):
         engine = BacktestingEngine()
 
         engine.set_parameters(
@@ -39,7 +39,7 @@ class back_testing_service():
             pricetick=self.pricetick,
             capital=self.capital,
         )
-        engine.add_strategy(AtrRsiStrategy, {})
+        engine.add_strategy(Template, {})
         engine.load_data()
         engine.run_backtesting()
         df = engine.calculate_result()
