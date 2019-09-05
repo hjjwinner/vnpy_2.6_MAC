@@ -47,15 +47,15 @@ def run_AtrRsiStrategy():
 
     resure = {}
 
-    while atr_length < 20:
+    while atr_length < 5:
         atr_length += 1
         atr_ma_length = 1
 
-        while atr_ma_length < 20:
+        while atr_ma_length < 5:
             atr_ma_length += 1
             rsi_length = 1
 
-            while rsi_length < 10:
+            while rsi_length < 5:
                 rsi_length += 1
                 rsi_entry = 1
 
@@ -63,12 +63,13 @@ def run_AtrRsiStrategy():
                     rsi_entry += 1
                     trailing_percent = 0.4
 
-                    while trailing_percent < 2:
+                    while trailing_percent < 1  \
+                            :
                         trailing_percent += 0.4
                         fixed_size = 1
 
-                        while fixed_size < 3:
-                            fixed_size += 1
+                        while fixed_size <= 1:
+                            # fixed_size += 1
 
                             AtrRsiStrategy.atr_length = atr_length
                             AtrRsiStrategy.atr_ma_length = atr_ma_length
@@ -100,7 +101,7 @@ def run_AtrRsiStrategy():
 
 
 
-run_AtrRsiStrategy()
+# run_AtrRsiStrategy()
 
 
 
@@ -120,10 +121,10 @@ def run_Template_testing_resure(template=None):
     print(test_data)
     return test_data
 
-# AtrRsiStrategy.atr_length = 2
-# AtrRsiStrategy.atr_ma_length = 2
-# AtrRsiStrategy.rsi_length = 2
-# AtrRsiStrategy.rsi_entry = 2
-# AtrRsiStrategy.trailing_percent = 0.8
-# AtrRsiStrategy.fixed_size = 5
-# run_Template_testing_resure(AtrRsiStrategy)
+AtrRsiStrategy.atr_length = 4
+AtrRsiStrategy.atr_ma_length = 4
+AtrRsiStrategy.rsi_length = 3
+AtrRsiStrategy.rsi_entry = 2
+AtrRsiStrategy.trailing_percent = 0.8
+AtrRsiStrategy.fixed_size = 2
+run_Template_testing_resure(AtrRsiStrategy)
