@@ -1,7 +1,7 @@
 from vnpy.trader.rqdata import rqdata_client
 from vnpy.trader.database import database_manager
 from vnpy.trader.object import (HistoryRequest)
-from vnpy.trader.constant import (Exchange,Interval)
+from vnpy.trader.constant import (Exchange, Interval)
 from datetime import datetime
 import rqdatac as rq
 
@@ -9,9 +9,9 @@ import rqdatac as rq
 class data_class_mongod(object):
 
     def __init__(self):
-        self.vt_symbol=None
+        self.vt_symbol = None
         self.interval = Interval.MINUTE
-        self.start= None
+        self.start = None
         self.end = None
         self.init_rqdata()
         pass
@@ -28,8 +28,6 @@ class data_class_mongod(object):
         rq.init(username, password,
                 ('rqdatad-pro.ricequant.com', 16011))
         return rq
-
-
 
     def query_bar_from_rq_list(
             self, vt_symbol: str, interval: Interval, start: datetime, end: datetime
@@ -67,14 +65,9 @@ class data_class_mongod(object):
         )
         rqdata_client.symbols.add(symbol)
         data = rqdata_client.query_history(req)
-
+        print(len(data))
         if data:
-
             database_manager.save_bar_data(data)
-
-
-    def query_
 
 # date_down = data_class_mongod()
 # date_down.query_bar_from_rq(vt_symbol='CU99.CFFEX', interval=Interval.MINUTE, start=datetime(2019, 1, 1), end=datetime(2019, 9, 1))
-

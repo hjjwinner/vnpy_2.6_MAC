@@ -26,7 +26,7 @@ SETTINGS = {
     "rqdata.password": "hNquASLMnsj6XvN7244jRy9wAiGGpGKcS-mrlPpND9TOUajZD61S2KjTfEEv22szfARmC7Ab4sOWcHGBlc8sJSKjQUxgxGm_uxYmwDmszQoGsr3qrdC1fgvDiTtBtuy3KtdngdyY6kOrkXOnu0hi5-de7Avdfl_riZUc_Yk2DAU=N78cYFYpV95cAStJFo0qcsV6fHuLFainVSspsleIUzgT6gLrld0cV6RU2MsLJX0M6eHKjjkAxfL4ypilQvowHwKUBybdi94hhGOfZ_GmV_GMEDitnM40HoVCYErA4fm_7melaRGHrQBUbcqQQZ2gu3rtmZWQgcIUTTFc6QI-tCM=",
 
     "database.driver": "mongodb",  # see database.Driver
-    "database.database": "vnpytest",#"database.db",  # for sqlite, use this as filepath
+    "database.database": "VNPYDB",#"database.db",  # for sqlite, use this as filepath
     "database.host": "localhost",
     "database.port": 27017,#3306,
     "database.user": "root",#"root",
