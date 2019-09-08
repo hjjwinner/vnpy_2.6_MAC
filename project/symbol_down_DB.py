@@ -2,8 +2,9 @@ import rqdatac
 from rqdatac import *
 import pandas as pd
 from vnpy.project.dataService import data_class_mongod
-from vnpy.trader.constant import (Exchange,Interval)
+from vnpy.trader.constant import (Exchange, Interval)
 from datetime import datetime
+
 
 def get_all_instruments():
     username = "license"
@@ -25,6 +26,7 @@ def get_all_instruments():
     data.to_csv('Future_conver.csv')
     return data
 
+
 # get_all_instruments()
 
 
@@ -42,9 +44,9 @@ def danlown_symbol(symbol):
     date_down.query_bar_from_rq()
 
 
-Future_conver= pd.read_csv('Future_conver.csv')
+Future_conver = pd.read_csv('Future_conver.csv')
 for index, row in Future_conver.iterrows():
-    if index < 100:
+    if index > 10 and index < 100:
         print(index)
         # symbol =''
         # symbol = row['convertid']
@@ -66,15 +68,10 @@ def get_all_instruments_CS():
 # danlown_symbol('000001.XSHE')
 
 
-
-
-
-
-
 def load_all_instruments_csv():
     Future_conver = pd.read_csv('Future_conver.csv')
     for index, row in Future_conver.iterrows():
-        if index < 5:
+        if index < 100:
             print(index)
             symbol = f"{row['convertid']}.{row['exchange']}"
 

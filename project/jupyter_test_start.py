@@ -118,13 +118,13 @@ def run_Template_testing_resure(template=None, symbol=VT_SYMBOL):
     return test_data
 
 
-AtrRsiStrategy.atr_length = 22
-AtrRsiStrategy.atr_ma_length = 10
-AtrRsiStrategy.rsi_length = 5
-AtrRsiStrategy.rsi_entry = 16
-AtrRsiStrategy.trailing_percent = 0.8
-AtrRsiStrategy.fixed_size = 1
-run_Template_testing_resure(AtrRsiStrategy)
+# AtrRsiStrategy.atr_length = 22
+# AtrRsiStrategy.atr_ma_length = 10
+# AtrRsiStrategy.rsi_length = 5
+# AtrRsiStrategy.rsi_entry = 16
+# AtrRsiStrategy.trailing_percent = 0.8
+# AtrRsiStrategy.fixed_size = 1
+# run_Template_testing_resure(AtrRsiStrategy)
 
 def test_all_symbol():
     list_sharpe_ratio =[]
@@ -140,4 +140,4 @@ def test_all_symbol():
 
     print(list_sharpe_ratio)
 
-# test_all_symbol()
+test_all_symbol()

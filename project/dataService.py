@@ -58,24 +58,25 @@ class data_class_mongod(object):
         symbol, exchange_str = self.vt_symbol.split(".")
 
         if exchange_str == 'CFFEX':
-            self.exchange.CFFEX
+            self.exchange = Exchange.CFFEX
         elif exchange_str == 'SHFE':
-            self.exchange.SHFE
+            self.exchange = Exchange.SHFE
         elif exchange_str == 'CZCE':
-            self.exchange.CZCE
+            self.exchange = Exchange.CZCE
         elif exchange_str == 'DCE':
-            self.exchange.DCE
+            self.exchange = Exchange.DCE
         elif exchange_str == 'INE':
-            self.exchange.INE
+            self.exchange = Exchange.INE
         elif exchange_str == 'SSE':
-            self.exchange.SSE
+            self.exchange = Exchange.SSE
         elif exchange_str == 'SZSE':
-            self.exchange.SZSE
+            self.exchange = Exchange.SZSE
         elif exchange_str == 'SGE':
-            self.exchange.SGE
+            self.exchange = Exchange.SGE
         elif exchange_str == 'WXE':
-            self.exchange.WXE
-
+            self.exchange = Exchange.WXE
+        print('self.exchange=' )
+        print(self.exchange)
         req = HistoryRequest(
             symbol=symbol,
             exchange=self.exchange,
@@ -85,7 +86,14 @@ class data_class_mongod(object):
         )
         rqdata_client.symbols.add(symbol)
         data = rqdata_client.query_history(req)
-        print(len(data))
+        try:
+            print(len(data))
+        except:
+            print('1')
+        else:
+            print('2')
+
+
         # print(data)
         if data:
             database_manager.save_bar_data(data)
