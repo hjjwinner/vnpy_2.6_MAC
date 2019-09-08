@@ -11,6 +11,7 @@ class data_class_mongod(object):
     def __init__(self):
         self.vt_symbol = None
         self.interval = Interval.MINUTE
+        self.exchange = Exchange.CFFEX
         self.start = None
         self.end = None
         self.init_rqdata()
@@ -56,9 +57,28 @@ class data_class_mongod(object):
         """
         symbol, exchange_str = self.vt_symbol.split(".")
 
+        if exchange_str == 'CFFEX':
+            self.exchange.CFFEX
+        elif exchange_str == 'SHFE':
+            self.exchange.SHFE
+        elif exchange_str == 'CZCE':
+            self.exchange.CZCE
+        elif exchange_str == 'DCE':
+            self.exchange.DCE
+        elif exchange_str == 'INE':
+            self.exchange.INE
+        elif exchange_str == 'SSE':
+            self.exchange.SSE
+        elif exchange_str == 'SZSE':
+            self.exchange.SZSE
+        elif exchange_str == 'SGE':
+            self.exchange.SGE
+        elif exchange_str == 'WXE':
+            self.exchange.WXE
+
         req = HistoryRequest(
             symbol=symbol,
-            exchange=Exchange.CFFEX,
+            exchange=self.exchange,
             interval=Interval(self.interval),
             start=self.start,
             end=self.end
@@ -66,8 +86,29 @@ class data_class_mongod(object):
         rqdata_client.symbols.add(symbol)
         data = rqdata_client.query_history(req)
         print(len(data))
+        # print(data)
         if data:
             database_manager.save_bar_data(data)
+
+
+
+    def query_bar_from_rq_base(self):
+        symbol, exchange_str = self.vt_symbol.split(".")
+
+        req = HistoryRequest(
+            symbol=symbol,
+            exchange=self.exchange,
+            interval=Interval(self.interval),
+            start=self.start,
+            end=self.end
+        )
+        rqdata_client.symbols.add(symbol)
+        data = rqdata_client.query_history(req)
+        print(len(data))
+        print(data)
+        if data:
+            database_manager.save_bar_data(data)
+
 
 # date_down = data_class_mongod()
 # date_down.query_bar_from_rq(vt_symbol='CU99.CFFEX', interval=Interval.MINUTE, start=datetime(2019, 1, 1), end=datetime(2019, 9, 1))

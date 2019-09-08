@@ -10,7 +10,7 @@ def get_all_instruments():
     password = "hNquASLMnsj6XvN7244jRy9wAiGGpGKcS-mrlPpND9TOUajZD61S2KjTfEEv22szfARmC7Ab4sOWcHGBlc8sJSKjQUxgxGm_uxYmwDmszQoGsr3qrdC1fgvDiTtBtuy3KtdngdyY6kOrkXOnu0hi5-de7Avdfl_riZUc_Yk2DAU=N78cYFYpV95cAStJFo0qcsV6fHuLFainVSspsleIUzgT6gLrld0cV6RU2MsLJX0M6eHKjjkAxfL4ypilQvowHwKUBybdi94hhGOfZ_GmV_GMEDitnM40HoVCYErA4fm_7melaRGHrQBUbcqQQZ2gu3rtmZWQgcIUTTFc6QI-tCM="
 
     rq = rqdatac.init(username, password, ('rqdatad-pro.ricequant.com', 16011))
-    data = all_instruments(type='CS', market='cn')
+    data = all_instruments(type='Future', market='cn')
     instruments_list = data['order_book_id']
     id_convert_list = []
     for id in instruments_list:
@@ -21,8 +21,8 @@ def get_all_instruments():
 
     pd_convert_id_list = pd.DataFrame(id_convert_list)
     data['convertid'] = pd_convert_id_list
-    pd_convert_id_list.to_csv('CS_id_convert.csv')
-    data.to_csv('CS_Future_conver.csv')
+    pd_convert_id_list.to_csv('id_convert.csv')
+    data.to_csv('Future_conver.csv')
     return data
 
 # get_all_instruments()
@@ -44,7 +44,7 @@ def danlown_symbol(symbol):
 
 Future_conver= pd.read_csv('Future_conver.csv')
 for index, row in Future_conver.iterrows():
-    if index > 100:
+    if index < 100:
         print(index)
         # symbol =''
         # symbol = row['convertid']
@@ -52,6 +52,21 @@ for index, row in Future_conver.iterrows():
         symbol = f"{row['convertid']}.{row['exchange']}"
         print(symbol)
         danlown_symbol(symbol)
+
+
+def get_all_instruments_CS():
+    username = "license"
+    password = "hNquASLMnsj6XvN7244jRy9wAiGGpGKcS-mrlPpND9TOUajZD61S2KjTfEEv22szfARmC7Ab4sOWcHGBlc8sJSKjQUxgxGm_uxYmwDmszQoGsr3qrdC1fgvDiTtBtuy3KtdngdyY6kOrkXOnu0hi5-de7Avdfl_riZUc_Yk2DAU=N78cYFYpV95cAStJFo0qcsV6fHuLFainVSspsleIUzgT6gLrld0cV6RU2MsLJX0M6eHKjjkAxfL4ypilQvowHwKUBybdi94hhGOfZ_GmV_GMEDitnM40HoVCYErA4fm_7melaRGHrQBUbcqQQZ2gu3rtmZWQgcIUTTFc6QI-tCM="
+
+    rqdatac.init(username, password, ('rqdatad-pro.ricequant.com', 16011))
+    data = all_instruments(type='CS')
+    return data
+
+
+# danlown_symbol('000001.XSHE')
+
+
+
 
 
 
