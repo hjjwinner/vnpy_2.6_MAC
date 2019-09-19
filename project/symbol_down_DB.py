@@ -41,19 +41,20 @@ def danlown_symbol(symbol):
     date_down.interval = INTERVAL
     date_down.start = START
     date_down.end = END
-    date_down.query_bar_from_rq()
+    # date_down.query_bar_from_rq()
+    date_down.query_bar_from_tushare()
 
-
-Future_conver = pd.read_csv('Future_conver.csv')
-for index, row in Future_conver.iterrows():
-    if index > 10 and index < 100:
-        print(index)
-        # symbol =''
-        # symbol = row['convertid']
-
-        symbol = f"{row['convertid']}.{row['exchange']}"
-        print(symbol)
-        danlown_symbol(symbol)
+danlown_symbol('000716.XSHE')
+# Future_conver = pd.read_csv('CS_Future_conver.csv')
+# for index, row in Future_conver.iterrows():
+#     if index > 100 and index <200:
+#         print(index)
+#         # symbol =''
+#         symbol = row['order_book_id']
+#
+#         # symbol = f"{row['convertid']}.{row['exchange']}"
+#         print(symbol)
+#         danlown_symbol(symbol)
 
 
 def get_all_instruments_CS():
@@ -76,3 +77,15 @@ def load_all_instruments_csv():
             symbol = f"{row['convertid']}.{row['exchange']}"
 
     return Future_conver
+
+
+
+username = "license"
+password = "hNquASLMnsj6XvN7244jRy9wAiGGpGKcS-mrlPpND9TOUajZD61S2KjTfEEv22szfARmC7Ab4sOWcHGBlc8sJSKjQUxgxGm_uxYmwDmszQoGsr3qrdC1fgvDiTtBtuy3KtdngdyY6kOrkXOnu0hi5-de7Avdfl_riZUc_Yk2DAU=N78cYFYpV95cAStJFo0qcsV6fHuLFainVSspsleIUzgT6gLrld0cV6RU2MsLJX0M6eHKjjkAxfL4ypilQvowHwKUBybdi94hhGOfZ_GmV_GMEDitnM40HoVCYErA4fm_7melaRGHrQBUbcqQQZ2gu3rtmZWQgcIUTTFc6QI-tCM="
+
+rq = rqdatac.init(username, password, ('rqdatad-pro.ricequant.com', 16011))
+# dataa = get_price('000716.XSHE', start_date='2018-01-04', end_date='2019-01-04', frequency='1d', fields=None, adjust_type='pre', skip_suspended =False, market='cn', expect_df=False)
+# dataa = get_price('000001.XSHE', start_date='2015-04-01', end_date='2015-04-12')
+# dataa =  instruments('000716.XSHE', market='cn')
+# print(dataa)
+

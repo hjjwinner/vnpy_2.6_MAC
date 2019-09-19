@@ -132,6 +132,9 @@ class RqdataClient:
             adjust_type="none"
         )
 
+
+
+
         data: List[BarData] = []
 
         if df is not None:
